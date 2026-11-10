@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">StepByStep</string>
+
+    <string name="step_counter_label">Steps</string>
+    <string name="step_counter_zero">0</string>
+    <string name="step_counter_unit">steps this session</string>
+    <string name="step_counter_spm_default">0.0 steps/min</string>
+    <string name="step_counter_spm_format">%.1f steps/min</string>
+    <string name="step_counter_no_sensor">This device has no step sensor</string>
+    <string name="step_counter_no_permission">Allow Physical Activity permission to count steps</string>
 </resources>
