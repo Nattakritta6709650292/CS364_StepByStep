@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/tvDetailDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
+        tools:text="2026-11-11 13:40:00" />
+
+    <TextView
+        android:id="@+id/tvDetailSteps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        tools:text="Steps: 120" />
+
+    <TextView
+        android:id="@+id/tvDetailShakes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        tools:text="Shakes: 30" />
+
+    <TextView
+        android:id="@+id/tvDetailDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        tools:text="Duration: 01:00" />
+
+    <TextView
+        android:id="@+id/tvDetailStepsPerMin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        tools:text="Steps/min: 120.0" />
+
+    <TextView
+        android:id="@+id/tvDetailShakesPerMin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        tools:text="Shakes/min: 30.0" />
+</LinearLayout>

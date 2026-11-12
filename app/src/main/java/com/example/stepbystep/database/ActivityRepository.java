@@ -39,7 +39,8 @@ public class ActivityRepository {
         try (Cursor cursor = helper.getReadableDatabase().query(
                 DatabaseHelper.TABLE_ACTIVITIES,
                 new String[]{DatabaseHelper.COLUMN_STEPS, DatabaseHelper.COLUMN_SHAKES,
-                        DatabaseHelper.COLUMN_DURATION, DatabaseHelper.COLUMN_DATE_TIME},
+                        DatabaseHelper.COLUMN_DURATION, DatabaseHelper.COLUMN_DATE_TIME,
+                        DatabaseHelper.COLUMN_ID},
                 null, null, null, null,
                 DatabaseHelper.COLUMN_DATE_TIME + " DESC, " + DatabaseHelper.COLUMN_ID + " DESC")) {
             while (cursor.moveToNext()) results.add(readSession(cursor));
@@ -52,7 +53,8 @@ public class ActivityRepository {
         try (Cursor cursor = helper.getReadableDatabase().query(
                 DatabaseHelper.TABLE_ACTIVITIES,
                 new String[]{DatabaseHelper.COLUMN_STEPS, DatabaseHelper.COLUMN_SHAKES,
-                        DatabaseHelper.COLUMN_DURATION, DatabaseHelper.COLUMN_DATE_TIME},
+                        DatabaseHelper.COLUMN_DURATION, DatabaseHelper.COLUMN_DATE_TIME,
+                        DatabaseHelper.COLUMN_ID},
                 DatabaseHelper.COLUMN_ID + " = ?", new String[]{String.valueOf(id)},
                 null, null, null)) {
             return cursor.moveToFirst() ? readSession(cursor) : null;
@@ -83,9 +85,17 @@ public class ActivityRepository {
         }
     }
 
+    /** Deletes one session. Returns the number of rows removed (0 if the id does not exist). */
+    public int deleteActivity(int id) {
+        return helper.getWritableDatabase().delete(DatabaseHelper.TABLE_ACTIVITIES,
+                DatabaseHelper.COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+    }
+
     private SessionData readSession(Cursor cursor) {
-        return new SessionData(cursor.getInt(0), cursor.getInt(1),
+        SessionData session = new SessionData(cursor.getInt(0), cursor.getInt(1),
                 cursor.getLong(2), cursor.getString(3));
+        session.id = cursor.getInt(4);
+        return session;
     }
 
     public void close() {

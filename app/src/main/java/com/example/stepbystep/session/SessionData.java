@@ -3,6 +3,9 @@ package com.example.stepbystep.session;
 
 public class SessionData {
 
+    // Database row id (0 until the session has been loaded from SQLite)
+    public int id;
+
     // Number of steps in the session
     public int steps;
 
