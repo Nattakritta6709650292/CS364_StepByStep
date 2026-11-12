@@ -1,11 +1,55 @@
 <resources>
     <string name="app_name">StepByStep</string>
 
-    <string name="step_counter_label">Steps</string>
+    <!-- Step counter tile (Person 1) -->
+    <string name="step_counter_label">👣 STEPS</string>
     <string name="step_counter_zero">0</string>
-    <string name="step_counter_unit">steps this session</string>
+    <string name="step_counter_unit">ก้าวเดิน</string>
     <string name="step_counter_spm_default">0.0 steps/min</string>
     <string name="step_counter_spm_format">%.1f steps/min</string>
-    <string name="step_counter_no_sensor">This device has no step sensor</string>
-    <string name="step_counter_no_permission">Allow Physical Activity permission to count steps</string>
+    <string name="step_counter_no_sensor">เครื่องนี้ไม่มีเซนเซอร์นับก้าว</string>
+    <string name="step_counter_no_permission">กรุณาอนุญาตสิทธิ์ Physical activity เพื่อนับก้าว</string>
+
+    <!-- Shake counter tile (Person 2) -->
+    <string name="shake_counter_label">▣ SHAKES</string>
+    <string name="shake_counter_unit">ครั้งที่เขย่า</string>
+
+    <!-- Session stats (Person 3) -->
+    <string name="session_duration_label">◷ ระยะเวลา</string>
+    <string name="session_spm_label">ก้าว/นาที</string>
+    <string name="session_shpm_label">เขย่า/นาที</string>
+    <string name="session_timer_zero">00:00</string>
+    <string name="rate_zero">0.0</string>
+    <string name="rate_format">%.1f</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_subtitle">Track your steps and shakes</string>
+    <string name="current_session">CURRENT SESSION</string>
+    <string name="total_title">ยอดสะสมจากประวัติ</string>
+    <string name="total_summary_format">%1$,d ก้าว • เขย่า %2$,d ครั้ง</string>
+    <string name="total_sessions_format">จากทั้งหมด %,d กิจกรรม</string>
+    <string name="button_start">เริ่มกิจกรรม</string>
+    <string name="button_save">บันทึกกิจกรรม</string>
+    <string name="new_step_record">🏆 NEW STEP RECORD!</string>
+    <string name="new_shake_record">🏆 NEW SHAKE RECORD!</string>
+    <string name="save_failed">บันทึกกิจกรรมไม่สำเร็จ</string>
+    <string name="saved">บันทึกกิจกรรมแล้ว</string>
+    <string name="deleted">ลบกิจกรรมแล้ว</string>
+
+    <!-- History -->
+    <string name="history_title">ประวัติกิจกรรม</string>
+    <string name="history_empty">ยังไม่มีประวัติกิจกรรม\nกด \"เริ่มกิจกรรม\" เพื่อเริ่มบันทึก</string>
+    <string name="history_icon">👣</string>
+    <string name="badge_step_record">NEW STEP RECORD</string>
+    <string name="badge_shake_record">NEW SHAKE RECORD</string>
+
+    <!-- Detail dialog -->
+    <string name="detail_title">รายละเอียดกิจกรรม</string>
+    <string name="detail_steps">จำนวนก้าว: %,d ก้าว</string>
+    <string name="detail_shakes">จำนวนเขย่า: %,d ครั้ง</string>
+    <string name="detail_duration">ระยะเวลา: %s</string>
+    <string name="detail_steps_per_min">ก้าว/นาที: %.1f</string>
+    <string name="detail_shakes_per_min">เขย่า/นาที: %.1f</string>
+    <string name="detail_close">ปิด</string>
+    <string name="detail_delete">ลบ</string>
 </resources>

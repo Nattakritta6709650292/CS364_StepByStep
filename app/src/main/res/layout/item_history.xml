@@ -2,47 +2,105 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="4dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp"
-    app:contentPadding="16dp">
+    android:layout_marginTop="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:contentPadding="14dp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textHistoryDateTime"
-            android:layout_width="match_parent"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_icon_circle"
+            android:gravity="center"
+            android:text="@string/history_icon"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="2026-11-11 13:40:00"
-            android:textAppearance="?attr/textAppearanceTitleMedium" />
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textHistoryDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                tools:text="29 Oct 18:57" />
+
+            <TextView
+                android:id="@+id/textHistoryDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                tools:text="29 Oct 2026 • 18:57" />
+
+            <TextView
+                android:id="@+id/textHistorySummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/steps_color"
+                android:textSize="14sp"
+                tools:text="12 steps • 7 shakes • 00:13 • 55.4 steps/min" />
+
+            <TextView
+                android:id="@+id/badgeStepRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_badge"
+                android:paddingStart="8dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="3dp"
+                android:text="@string/badge_step_record"
+                android:textColor="@color/badge_text"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/badgeShakeRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_badge"
+                android:paddingStart="8dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="3dp"
+                android:text="@string/badge_shake_record"
+                android:textColor="@color/badge_text"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/textHistorySteps"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Steps: 120" />
-
-        <TextView
-            android:id="@+id/textHistoryShakes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Shakes: 30" />
-
-        <TextView
-            android:id="@+id/textHistoryDuration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Duration: 01:00" />
+            android:layout_marginStart="8dp"
+            android:text="›"
+            android:textColor="@color/text_secondary"
+            android:textSize="26sp"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
