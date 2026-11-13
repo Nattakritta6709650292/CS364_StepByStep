@@ -5,67 +5,82 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * TEMPORARY placeholder so MainActivity compiles before Person 2 delivers.
- * Replace this file with Person 2's ShakeDetector (same public API:
- * constructor(Context), setListener, start, stop).
+ * Person 2 - Accelerometer shake detector.
+ *
+ * Public API deliberately matches the existing MainActivity:
+ * new ShakeDetector(context), setListener(...), start(), stop().
+ * Counts and session duration belong to SessionManager, not this class.
  */
 public class ShakeDetector implements SensorEventListener {
 
-    private static final float THRESHOLD_G = 2.5f;
-    private static final long COOLDOWN_MS = 500;
-
-    private final SensorManager sensorManager;
+    @Nullable private final SensorManager sensorManager;
     @Nullable private final Sensor accelerometer;
+    @NonNull private final ShakeSignalProcessor processor = new ShakeSignalProcessor();
     @Nullable private ShakeListener listener;
-    private boolean registered = false;
-    private long lastShakeMs = 0;
+    private boolean registered;
 
     public ShakeDetector(@NonNull Context context) {
-        sensorManager = (SensorManager) context.getApplicationContext()
-                .getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = sensorManager == null ? null
-                : sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Context appContext = context.getApplicationContext();
+        sensorManager = (SensorManager) appContext.getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager == null
+                ? null : sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
     public void setListener(@Nullable ShakeListener listener) {
         this.listener = listener;
     }
 
-    public void start() {
-        if (registered || sensorManager == null || accelerometer == null) return;
-        registered = sensorManager.registerListener(
-                this, accelerometer, SensorManager.SENSOR_DELAY_UI);
+    /** A device without an accelerometer can still run the step module. */
+    public boolean isSensorAvailable() {
+        return accelerometer != null;
     }
 
+    public boolean isRunning() {
+        return registered;
+    }
+
+    /** Start listening once. Check isRunning() to detect registration failure. */
+    public void start() {
+        if (registered || sensorManager == null || accelerometer == null) return;
+
+        // On a new start (including resume) re-learn gravity and avoid
+        // using a previous cooldown timestamp from another sensor stream.
+        processor.reset();
+        registered = sensorManager.registerListener(
+                this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    /** Stop listening so the sensor does not waste battery in the background. */
     public void stop() {
-        if (!registered || sensorManager == null) return;
-        sensorManager.unregisterListener(this);
+        if (registered && sensorManager != null) {
+            sensorManager.unregisterListener(this);
+        }
         registered = false;
+        processor.reset();
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float gX = event.values[0] / SensorManager.GRAVITY_EARTH;
-        float gY = event.values[1] / SensorManager.GRAVITY_EARTH;
-        float gZ = event.values[2] / SensorManager.GRAVITY_EARTH;
-        double gForce = Math.sqrt(gX * gX + gY * gY + gZ * gZ);
+        if (!registered || event.sensor.getType() != Sensor.TYPE_ACCELEROMETER
+                || event.values.length < 3) {
+            return;
+        }
 
-        if (gForce < THRESHOLD_G) return;
-
-        long now = SystemClock.elapsedRealtime();
-        if (now - lastShakeMs < COOLDOWN_MS) return;
-        lastShakeMs = now;
-
-        if (listener != null) listener.onShakeDetected();
+        if (processor.addSample(event.values[0], event.values[1],
+                event.values[2], event.timestamp)) {
+            if (listener != null) {
+                listener.onShakeDetected();
+            }
+        }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // No action needed for shake counting.
     }
 }

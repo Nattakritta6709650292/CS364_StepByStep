@@ -13,6 +13,8 @@
     <!-- Shake counter tile (Person 2) -->
     <string name="shake_counter_label">▣ SHAKES</string>
     <string name="shake_counter_unit">ครั้งที่เขย่า</string>
+    <string name="shake_counter_zero">0</string>
+    <string name="shake_counter_no_sensor">เครื่องนี้ไม่มีเซนเซอร์ Accelerometer</string>
 
     <!-- Session stats (Person 3) -->
     <string name="session_duration_label">◷ ระยะเวลา</string>

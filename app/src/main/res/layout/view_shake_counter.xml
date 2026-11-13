@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- TEMPORARY until Person 2 delivers view_shake_counter.xml. Keep the id tvShakeCount. -->
+<!-- Person 2 - Shake counter tile. MainActivity owns the displayed count. -->
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="@string/step_counter_zero"
+            android:text="@string/shake_counter_zero"
             android:textColor="@color/text_primary"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -43,5 +43,16 @@
             android:text="@string/shake_counter_unit"
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvShakeStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/shake_counter_no_sensor"
+            android:textColor="@color/error_text"
+            android:textSize="11sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
