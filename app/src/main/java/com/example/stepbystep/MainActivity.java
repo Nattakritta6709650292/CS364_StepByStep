@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements SessionListener {
     private TextView tvStepCount, tvShakeCount, tvStepStatus;
     private TextView tvTotalSummary, tvTotalSessions;
     private TextView tvNewStepRecord, tvNewShakeRecord, tvHistoryEmpty;
+    private TextView tvShakeStatus;
     private RecyclerView recyclerHistory;
     private Button buttonStartSave;
 
@@ -88,6 +89,12 @@ public class MainActivity extends AppCompatActivity implements SessionListener {
         shakeDetector = new ShakeDetector(this);
         shakeDetector.setListener(() -> sessionManager.onShakeDetected());
 
+        tvShakeStatus.setVisibility(
+            shakeDetector.isSensorAvailable()
+                ? View.GONE
+                : View.VISIBLE
+        );
+
         // One button: "start" when idle, "save" (stop + insert) while a session is running.
         buttonStartSave.setOnClickListener(v -> {
             if (sessionRunning) stopActivity();
@@ -109,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements SessionListener {
         tvStepCount = findViewById(R.id.tvStepCount);
         tvStepStatus = findViewById(R.id.tvStepStatus);
         tvShakeCount = findViewById(R.id.tvShakeCount);
+        tvShakeStatus = findViewById(R.id.tvShakeStatus);
 
         tvTotalSummary = findViewById(R.id.tvTotalSummary);
         tvTotalSessions = findViewById(R.id.tvTotalSessions);
